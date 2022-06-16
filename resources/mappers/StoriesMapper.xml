@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fusePong.persistence.mybatis.mappers.StoriesMapper">
+    <resultMap type='Stories' id='StoriesResult'>
+        <id property='id' column='id_historia'/>
+        <result property='description' column='descripcion'/>
+        <result property='project' column='id_proyecto'/>
+        <result property='status' column='estado'/>
+        <!--        <association property="resources" javaType="Resource" resultMap="edu.eci.cvds.gestor.persistence.mybatis.mappers.ResourceMapper.ResourceResult" columnPrefix="re_"/>-->
+        <!--        <association property="Uname" javaType="User" resultMap="edu.eci.cvds.gestor.persistence.mybatis.mappers.UserMapper.UserResult" columnPrefix="u_"/>-->
+    </resultMap>
+
+</mapper>

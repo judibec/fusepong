@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <typeAlias type='fusePong.entities.Company' alias='Company'/>
+        <typeAlias type='fusePong.entities.Project' alias='Project'/>
+        <typeAlias type='fusePong.entities.Stories' alias='Stories'/>
+        <typeAlias type='fusePong.entities.Tickets' alias='Tickets'/>
+        <typeAlias type='fusePong.entities.User' alias='User'/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="org.postgresql.Driver" />
+                <property name="url" value="jdbc:postgresql://containers-us-west-74.railway.app:5926/railway?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory" />
+                <property name="username" value="postgres" />
+                <property name="password" value="FWhhNeGLMw4YrTuLClkQ" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mappers/CompanyMapper.xml"></mapper>
+        <mapper resource="mappers/ProjectMapper.xml"></mapper>
+        <mapper resource="mappers/StoriesMapper.xml"></mapper>
+        <mapper resource="mappers/TicketsMapper.xml"></mapper>
+        <mapper resource="mappers/UserMapper.xml"></mapper>
+    </mappers>
+
+</configuration>
