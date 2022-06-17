@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Historias</title>
+    <style type="text/css">
+        body {
+            font-family: 'Overpass', sans-serif;
+            background-color:#0099B4;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .titulo{
+            background-color:#DAF5DB;
+        }
+        .valor{
+            color:black;
+        }
+    </style>
+</h:head>
+<h:body>
+    <h:form>
+        <div>
+        <p:button value="Atras" outcome="proyectos"/>
+        </div>
+        <div>
+            <p:dataTable id="tabla_historias" var="stories" value="#{ProjectBean.projectStories}"
+                         currentPageReportTemplate="{totalRecords} historias" scrollable="true"
+            >
+                <p:column headerText="ID" class="titulo">
+                    <h:outputText value="#{stories.id}" class="valor"/>
+                </p:column>
+                <p:column headerText="Descripcion" class="titulo">
+                    <h:outputText value="#{stories.description}" class="valor"/>
+                </p:column>
+                <p:column headerText="Estado" class="titulo">
+                    <h:outputText value="#{stories.status}" class="valor"/>
+                </p:column>
+                <p:column headerText="Acciones" class="titulo">
+                    <p:commandButton action="#{StoryBean.editedStory(stories.id,'activo')}" value="activo" styleClass="rounded-button ui-button-success"/>
+                    <p:commandButton action="#{StoryBean.editedStory(stories.id,'en proceso')}" value="en proceso" styleClass="rounded-button ui-button-warning"/>
+                    <p:commandButton action="#{StoryBean.editedStory(stories.id,'finalizado')}" value="finalizado" styleClass="rounded-button ui-button-secondary"/>
+                    <p:commandButton action="#{StoryBean.deleteStory(stories.id)}" icon="pi pi-trash" styleClass="rounded-button ui-button-danger"/>
+                </p:column>
+            </p:dataTable>
+
+        </div>
+    </h:form>
+</h:body>
+</html>
