@@ -7,7 +7,9 @@ import fusePong.services.UserServices;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.primefaces.PrimeFaces;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -17,7 +19,7 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name="RegistrarBean")
-@SessionScoped
+@ApplicationScoped
 
 public class RegistrarBean extends BasePageBean{
 
@@ -30,11 +32,17 @@ public class RegistrarBean extends BasePageBean{
     private String name;
     private String email;
     private String password;
-    private int companyn;
+    private Integer company;
+    private String empresa;
+
+    @PostConstruct
+    public void init(){
+        super.init();
+    }
 
     private List<String> nombres = new ArrayList<String>();
 
-    public void registrarUsuario(String name, String email, String password, String company){
+    public void registrarUsuario(){
         try{
             if(name.trim().isEmpty()){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Nombre requerido"));
@@ -42,14 +50,11 @@ public class RegistrarBean extends BasePageBean{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Email requerido"));
             }if(password.trim().isEmpty()){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Password requerido"));
-            }if(company.trim().isEmpty()){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Company requerido"));
             }else{
+                System.out.println(empresa);
+                company=getNit(empresa);
                 System.out.println(company);
-                this.name=name; this.email=email; this.password=password;
-                this.companyn=getNit(company);
-                System.out.println(companyn);
-                userServices.registrarUsuario(name,email,password,companyn);
+                userServices.registrarUsuario(name,email,password,company);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message", " Se ha registrado el Usuario");
                 PrimeFaces.current().dialog().showMessageDynamic(message);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/tickets/login.xhtml");
@@ -61,7 +66,7 @@ public class RegistrarBean extends BasePageBean{
         }
     }
 
-    public int getNit(String company){
+    public Integer getNit(String company){
         return ticketsServices.getNit(company);
     }
 
@@ -75,5 +80,37 @@ public class RegistrarBean extends BasePageBean{
             nombres.add(company.getName());
         }
         return nombres;
+    }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -5,7 +5,7 @@ import fusePong.entities.Company;
 import java.util.List;
 
 public interface CompanyDAO {
-    public int getNit(String company);
+    public Integer getNit(String company);
 
     public List<Company> getEmpresas();
 }

@@ -14,7 +14,7 @@ public class MyBatisCompanyDAO implements CompanyDAO {
     private CompanyMapper companyMapper;
 
     @Override
-    public int getNit(String company) {
+    public Integer getNit(String company) {
         try{
             return companyMapper.getNit(company);
         }catch (PersistenceException e){

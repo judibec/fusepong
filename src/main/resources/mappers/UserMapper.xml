@@ -16,7 +16,7 @@
     </resultMap>
 
     <insert id="registrarUsuario" parameterType="map">
-        insert into Usuarios(nombre,correo,contraseña,rol,empresa_nit) values (#{nombre}, #{correo}, #{contraseña}, "E", #{empresa})
+        insert into Usuarios(nombre,correo,contraseña,rol,empresa_nit) values (#{nombre}, #{correo}, #{contraseña}, 'E', #{empresa})
     </insert>
 
 </mapper>

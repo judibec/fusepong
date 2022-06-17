@@ -28,7 +28,7 @@ public class TicketsServicesImpl implements TicketsServices {
     private UserDAO userDAO;
 
     @Override
-    public int getNit(String company) {
+    public Integer getNit(String company) {
         try{
             return companyDAO.getNit(company);
         }catch (PersistenceException e){

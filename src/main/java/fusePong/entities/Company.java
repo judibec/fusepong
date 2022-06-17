@@ -2,7 +2,7 @@ package fusePong.entities;
 
 public class Company {
     private String name;
-    private int nit;
+    private Integer nit;
     private int number;
     private String address;
     private String email;
@@ -11,7 +11,7 @@ public class Company {
         super();
     }
 
-    public Company(String name, int nit, int number, String address, String email){
+    public Company(String name, Integer nit, int number, String address, String email){
         this.name=name;
         this.nit=nit;
         this.number=number;
@@ -27,11 +27,11 @@ public class Company {
         this.name = name;
     }
 
-    public int getNit() {
+    public Integer getNit() {
         return nit;
     }
 
-    public void setNit(int nit) {
+    public void setNit(Integer nit) {
         this.nit = nit;
     }
 

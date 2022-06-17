@@ -22,19 +22,19 @@
             <h3>Datos del Usuario</h3>
             <h:panelGrid columns="2" cellpadding="7">
                 <p:outputLabel for="nombre" value="Nombre"/>
-                <p:inputText id="nombre" binding="#{nombre}"/>
+                <p:inputText id="nombre" value="#{RegistrarBean.name}" type="String" placeholder=""/>
                 <p:outputLabel for="correo" value="Correo"/>
-                <p:inputText id="correo" binding="#{correo}"/>
+                <p:inputText id="correo" value="#{RegistrarBean.email}" type="String" placeholder=""/>
                 <p:outputLabel for="contraseña" value="Contraseña"/>
-                <p:inputText id="contraseña" binding="#{contraseña}"/>
+                <p:inputText id="contraseña" value="#{RegistrarBean.password}" type="String" placeholder=""/>
                 <p:outputLabel for="empresa" value="Empresa"/>
-                <p:selectOneMenu id="empresa" binding="#{empresa}" >
+                <p:selectOneMenu id="empresa" value="#{RegistrarBean.empresa}">
                     <f:selectItem itemLabel="Seleccione Empresa" itemValue="" noSeleccionOption="true"/>
                     <f:selectItems value="#{RegistrarBean.getEmpresasNombre()}"/>
                 </p:selectOneMenu>
+                <p:commandButton value="Registrar"
+                                 actionListener="#{RegistrarBean.registrarUsuario}"/>
             </h:panelGrid>
-            <p:commandButton value="Registrar"
-                             actionListener="#{RegistrarBean.registrarUsuario(nombre.value,correo.value,contraseña.value,empresa.value)}"/>
         </div>
     </h:form>
 </h:body>

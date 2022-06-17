@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TicketsServices {
 
-    public int getNit(String company);
+    public Integer getNit(String company);
 
     public List<Company> getEmpresas();
 

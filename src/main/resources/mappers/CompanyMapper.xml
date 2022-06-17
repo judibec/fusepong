@@ -14,7 +14,7 @@
 <!--        <association property="Uname" javaType="User" resultMap="edu.eci.cvds.gestor.persistence.mybatis.mappers.UserMapper.UserResult" columnPrefix="u_"/>-->
     </resultMap>
 
-    <select id="getNit" resultMap="CompanyResult">
+    <select parameterType="map" id="getNit" resultType="int">
         select
         c.nit
 

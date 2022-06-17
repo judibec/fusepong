@@ -6,13 +6,13 @@ public class User {
     private String password;
     private char role;
     private int id;
-    private int company;
+    private Integer company;
 
     public User() {
         super();
     }
 
-    public User(int id, String name, String email, String password, char role, int company) {
+    public User(int id, String name, String email, String password, char role, Integer company) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -61,11 +61,11 @@ public class User {
         this.id = id;
     }
 
-    public int getCompany() {
+    public Integer getCompany() {
         return company;
     }
 
-    public void setCompany(int company) {
+    public void setCompany(Integer company) {
         this.company = company;
     }
 }
