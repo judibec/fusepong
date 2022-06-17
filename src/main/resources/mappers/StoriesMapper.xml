@@ -38,4 +38,8 @@
         Where h.id_historia = #{storyId};
     </update>
 
+    <insert id="register" parameterType="map">
+        insert into Historias(descripcion, id_proyecto, estado) values (#{descripcion}, #{idProyecto}, #{estado});
+    </insert>
+
 </mapper>

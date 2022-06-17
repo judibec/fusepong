@@ -23,6 +23,7 @@ public class ProjectBean extends BasePageBean{
     private TicketsServices ticketsServices;
 
     private Project project;
+    private int projectId;
     private List<Stories> projectStories = new ArrayList<Stories>();
 
     public List<Project> getProyectosEmpresa(String email){
@@ -37,6 +38,7 @@ public class ProjectBean extends BasePageBean{
      }
 
      public void getProjectStories(int proyectoId) throws IOException {
+        this.projectId = proyectoId;
         projectStories = ticketsServices.getProjectStories(proyectoId);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("/tickets/historias.xhtml");
@@ -46,4 +48,7 @@ public class ProjectBean extends BasePageBean{
         return projectStories;
      }
 
+    public int getProjectId() {
+        return projectId;
+    }
 }

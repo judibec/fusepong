@@ -8,19 +8,19 @@
         <id property='id' column='id_proyecto'/>
         <result property='name' column='nombre'/>
         <result property='company' column='empresa_nit'/>
-        <!--        <association property="resources" javaType="Resource" resultMap="edu.eci.cvds.gestor.persistence.mybatis.mappers.ResourceMapper.ResourceResult" columnPrefix="re_"/>-->
-        <!--        <association property="Uname" javaType="User" resultMap="edu.eci.cvds.gestor.persistence.mybatis.mappers.UserMapper.UserResult" columnPrefix="u_"/>-->
+        <association property="companyName" javaType="Company" resultMap="fusePong.persistence.mybatis.mappers.CompanyMapper.CompanyResult" columnPrefix="c_"/>
     </resultMap>
 
     <select parameterType="map" id="consultProyectosEmpresa" resultMap="ProjectResult">
         select
         p.id_proyecto,
         p.nombre,
-        p.empresa_nit
+        p.empresa_nit,
+        c.nombre as c_nombre
 
         From Proyectos p
-        JOIN Empresas e ON e.nit = p.empresa_nit
-        JOIN Usuarios u ON u.empresa_nit = e.nit
+        JOIN Empresas c ON c.nit = p.empresa_nit
+        JOIN Usuarios u ON u.empresa_nit = c.nit
 
         WHERE u.correo = #{email};
     </select>

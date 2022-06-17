@@ -5,6 +5,7 @@ public class Project {
     private int id;
     private String name;
     private int company;
+    private Company companyName;
 
     public Project(){
         super();
@@ -38,6 +39,14 @@ public class Project {
 
     public void setCompany(int company) {
         this.company = company;
+    }
+
+    public Company getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(Company companyName) {
+        this.companyName = companyName;
     }
 
     @Override

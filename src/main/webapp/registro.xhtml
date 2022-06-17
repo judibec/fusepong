@@ -22,15 +22,15 @@
             <h3>Datos del Usuario</h3>
             <h:panelGrid columns="2" cellpadding="7">
                 <p:outputLabel for="nombre" value="Nombre"/>
-                <p:inputText id="nombre" binding="#{nombre}" required="true"/>
+                <p:inputText id="nombre" binding="#{nombre}"/>
                 <p:outputLabel for="correo" value="Correo"/>
-                <p:inputText id="correo" binding="#{correo}" required="true"/>
+                <p:inputText id="correo" binding="#{correo}"/>
                 <p:outputLabel for="contraseña" value="Contraseña"/>
-                <p:inputText id="contraseña" binding="#{contraseña}" required="true"/>
+                <p:inputText id="contraseña" binding="#{contraseña}"/>
                 <p:outputLabel for="empresa" value="Empresa"/>
-                <p:selectOneMenu id="empresa" binding="#{empresa}" required="true">
+                <p:selectOneMenu id="empresa" binding="#{empresa}" >
                     <f:selectItem itemLabel="Seleccione Empresa" itemValue="" noSeleccionOption="true"/>
-                    <f:selectItems value="#{RegistrarBean.getEmpresas().getName()}"/>
+                    <f:selectItems value="#{RegistrarBean.getEmpresasNombre()}"/>
                 </p:selectOneMenu>
             </h:panelGrid>
             <p:commandButton value="Registrar"

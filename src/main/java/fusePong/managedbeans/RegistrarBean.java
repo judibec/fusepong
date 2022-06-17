@@ -32,19 +32,23 @@ public class RegistrarBean extends BasePageBean{
     private String password;
     private int companyn;
 
+    private List<String> nombres = new ArrayList<String>();
+
     public void registrarUsuario(String name, String email, String password, String company){
         try{
-            if(name==null){
+            if(name.trim().isEmpty()){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Nombre requerido"));
-            }if(email==null){
+            }if(email.trim().isEmpty()){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Email requerido"));
-            }if(password==null){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","password requerido"));
-            }if(company==null){
+            }if(password.trim().isEmpty()){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Password requerido"));
+            }if(company.trim().isEmpty()){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Company requerido"));
             }else{
-                System.out.println(company.toString());
-                this.name=name; this.email=email; this.password=password; this.companyn=getNit(company.toString());
+                System.out.println(company);
+                this.name=name; this.email=email; this.password=password;
+                this.companyn=getNit(company);
+                System.out.println(companyn);
                 userServices.registrarUsuario(name,email,password,companyn);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message", " Se ha registrado el Usuario");
                 PrimeFaces.current().dialog().showMessageDynamic(message);
@@ -63,5 +67,13 @@ public class RegistrarBean extends BasePageBean{
 
     public List<Company> getEmpresas(){
         return ticketsServices.getEmpresas();
+    }
+
+    public List<String> getEmpresasNombre(){
+        List<Company> empresa = ticketsServices.getEmpresas();
+        for (Company company : empresa) {
+            nombres.add(company.getName());
+        }
+        return nombres;
     }
 }

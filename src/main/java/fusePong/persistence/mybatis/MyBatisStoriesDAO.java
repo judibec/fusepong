@@ -39,4 +39,13 @@ public class MyBatisStoriesDAO implements StoriesDAO {
             throw new PersistenceException(e.getMessage());
         }
     }
+
+    @Override
+    public void register(String descripcion, int idProyecto, String estado) {
+        try{
+            storiesMapper.register(descripcion,idProyecto,estado);
+        }catch (PersistenceException e){
+            throw new PersistenceException(e.getMessage());
+        }
+    }
 }

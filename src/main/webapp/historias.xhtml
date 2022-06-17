@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Historias</title>
@@ -23,7 +24,9 @@
 <h:body>
     <h:form>
         <div>
-        <p:button value="Atras" outcome="proyectos"/>
+            <p:button value="Atras" outcome="proyectos"/>
+            <p:commandButton value="Nueva Historia" icon="pi pi-plus" styleClass="ui-button-success"
+                             style="margin-right: .5rem" onclick="PF('dlg2').show();"/>
         </div>
         <div>
             <p:dataTable id="tabla_historias" var="stories" value="#{ProjectBean.projectStories}"
@@ -45,8 +48,42 @@
                     <p:commandButton action="#{StoryBean.deleteStory(stories.id)}" icon="pi pi-trash" styleClass="rounded-button ui-button-danger"/>
                 </p:column>
             </p:dataTable>
-
         </div>
+        <p:dialog header="Crear Nueva Historia" widgetVar="dlg2" modal="true"  resizable="false" height="400">
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel for="descripcion" value="Descripcion:" />
+                <p:inputText id="descripcion" binding= "#{descripcion}"/>
+                <label class="bmd-label-floating">Estado:</label>
+                <h:selectOneMenu binding="#{status}" class="form-control">
+                    <f:selectItem itemLabel="Seleccione" itemValue=""/>
+                    <f:selectItem itemLabel="activo" itemValue="activo"/>
+                    <f:selectItem itemLabel="en proceso" itemValue="en proceso"/>
+                    <f:selectItem itemLabel="finalizado" itemValue="finalizado"/>
+                </h:selectOneMenu>
+                <p:commandButton value="Registrar" >
+                    <p:confirm header="Confirmación" message="¿Desea agregar historia?" icon="pi pi-exclamation-triangle" />
+                    <f:actionListener binding="#{StoryBean.register(descripcion.value,ProjectBean.projectId,status.value)}" update="frmm2" />
+                </p:commandButton>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <div align="center">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                    </div>
+                </p:confirmDialog>
+
+            </h:panelGrid>
+        </p:dialog>
     </h:form>
+    <script>
+          document.addEventListener('DOMContentLoaded', function(){
+        let formulario = document.getElementById('frmm2');
+        formulario.addEventListener('submit', function() {
+          formulario.reset();
+        });
+      });
+    </script>
 </h:body>
 </html>

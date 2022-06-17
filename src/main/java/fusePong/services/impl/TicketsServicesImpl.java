@@ -90,5 +90,14 @@ public class TicketsServicesImpl implements TicketsServices {
         }
     }
 
+    @Override
+    public void register(String descripcion, int idProyecto, String estado) {
+        try{
+            storiesDAO.register(descripcion,idProyecto,estado);
+        }catch (PersistenceException e){
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+
 
 }

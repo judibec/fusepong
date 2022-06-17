@@ -11,4 +11,6 @@ public interface StoriesMapper {
     public void deletedStory(@Param("storyId") int storyId);
 
     public void editedStory(@Param("storyId") int storyId,@Param("estado")String estado);
+
+    public void register(@Param("descripcion") String descripcion,@Param("idProyecto")int idProyecto,@Param("estado")String estado);
 }

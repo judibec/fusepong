@@ -10,4 +10,6 @@ public interface StoriesDAO {
     public void deletedStory(int storyId);
 
     public void editedStory(int storyId,String estado);
+
+    public void register(String descripcion, int idProyecto, String estado);
 }
