@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import fusePong.entities.Company;
 import fusePong.entities.Project;
 import fusePong.entities.Stories;
+import fusePong.entities.Tickets;
 import fusePong.persistence.*;
 import fusePong.services.TicketsServices;
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -73,6 +74,15 @@ public class TicketsServicesImpl implements TicketsServices {
     }
 
     @Override
+    public List<Tickets> getStoriesTicket(int storyId) {
+        try{
+            return ticketsDAO.getStoriesTicket(storyId);
+        }catch (PersistenceException e){
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+
+    @Override
     public void deletedStory(int storyId) {
         try{
             storiesDAO.deletedStory(storyId);
@@ -94,6 +104,33 @@ public class TicketsServicesImpl implements TicketsServices {
     public void register(String descripcion, int idProyecto, String estado) {
         try{
             storiesDAO.register(descripcion,idProyecto,estado);
+        }catch (PersistenceException e){
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deletedTicket(int ticketId) {
+        try{
+            ticketsDAO.deletedTicket(ticketId);
+        }catch (PersistenceException e){
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void editedTicket(int ticketId, String estado) {
+        try{
+            ticketsDAO.editedTicket(ticketId,estado);
+        }catch (PersistenceException e){
+            throw new PersistenceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void registerTicket(String descripcion, int storyId, String estado, String comentario) {
+        try{
+            ticketsDAO.registerTicket(descripcion,storyId,estado,comentario);
         }catch (PersistenceException e){
             throw new PersistenceException(e.getMessage());
         }

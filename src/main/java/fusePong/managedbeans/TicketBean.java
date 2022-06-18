@@ -1,6 +1,5 @@
 package fusePong.managedbeans;
 
-
 import com.google.inject.Inject;
 import fusePong.entities.Stories;
 import fusePong.entities.Tickets;
@@ -17,37 +16,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-@ManagedBean(name="StoryBean")
+@ManagedBean(name="TicketBean")
 @SessionScoped
-public class StoriesBean extends BasePageBean{
-
+public class TicketBean extends BasePageBean{
     @Inject
     private TicketsServices ticketsServices;
 
-    private int storyId;
-    private List<Tickets> storiesTicket = new ArrayList<Tickets>();
-
-
-    public void deleteStory(int storyId) throws IOException {
-        ticketsServices.deletedStory(storyId);
+    public void deleteTicket(int storyId) throws IOException {
+        ticketsServices.deletedTicket(storyId);
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect("/tickets/proyectos.xhtml");
+        facesContext.getExternalContext().redirect("/tickets/historias.xhtml");
     }
 
-    public void editedStory(int storyId,String estado) throws IOException {
-        ticketsServices.editedStory(storyId,estado);
+    public void editedTicket(int storyId,String estado) throws IOException {
+        ticketsServices.editedTicket(storyId,estado);
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect("/tickets/proyectos.xhtml");
+        facesContext.getExternalContext().redirect("/tickets/historias.xhtml");
     }
 
-    public void register(String descripcion, int idProyecto, String estado) throws IOException {
+    public void registerTicket(String descripcion, int idHistoria, String estado, String comentario) throws IOException {
         try {
             if((descripcion.trim().isEmpty() || descripcion.equals(null)) && (estado.trim().isEmpty() || descripcion.equals(null))){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error","Todos los campos deben estar llenos"));
             }else {
-                ticketsServices.register(descripcion, idProyecto, estado);
+                ticketsServices.registerTicket(descripcion, idHistoria, estado, comentario);
                 FacesContext facesContext = FacesContext.getCurrentInstance();
-                facesContext.getExternalContext().redirect("/tickets/proyectos.xhtml");
+                facesContext.getExternalContext().redirect("/tickets/historias.xhtml");
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Message", " Se ha agregado la historia");
                 PrimeFaces.current().dialog().showMessageDynamic(message);
             }
@@ -57,18 +51,4 @@ public class StoriesBean extends BasePageBean{
 
     }
 
-    public void getStoriesTicket(int storyId) throws IOException {
-        this.storyId = storyId;
-        storiesTicket = ticketsServices.getStoriesTicket(storyId);
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect("/tickets/tickets.xhtml");
-    }
-
-    public List<Tickets> getStoriesTicket(){
-        return storiesTicket;
-    }
-
-    public int getStoryId() {
-        return storyId;
-    }
 }

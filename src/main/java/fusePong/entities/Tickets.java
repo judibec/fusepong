@@ -7,6 +7,7 @@ public class Tickets {
     private int story;
     private String status;
     private String comments;
+    private Stories stories;
 
     public Tickets(){
         super();
@@ -58,5 +59,13 @@ public class Tickets {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public Stories getStories() {
+        return stories;
+    }
+
+    public void setStories(Stories stories) {
+        this.stories = stories;
     }
 }

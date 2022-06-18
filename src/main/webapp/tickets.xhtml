@@ -32,9 +32,8 @@
                              style="margin-right: .5rem" onclick="PF('dlg2').show();"/>
         </div>
         <div>
-            <p:dataTable id="tabla_ticket" var="ticket" value="#{TicketBean.storiesTicket}"
-                         currentPageReportTemplate="{totalRecords} tickets" scrollable="true"
-            >
+            <p:dataTable id="tabla_ticket" var="ticket" value="#{StoryBean.storiesTicket}"
+                         currentPageReportTemplate="{totalRecords} tickets" scrollable="true">
                 <p:column headerText="ID" class="titulo">
                     <h:outputText value="#{ticket.id}" class="valor"/>
                 </p:column>
@@ -42,23 +41,23 @@
                     <h:outputText value="#{ticket.description}" class="valor"/>
                 </p:column>
                 <p:column headerText="Historia" class="titulo">
-                    <h:outputText value="#{ticket.status}" class="valor"/>
+                    <h:outputText value="#{ticket.getStories().getDescription()}" class="valor"/>
                 </p:column>
-                <p:column headerText="Estado" class="titulo">
+                <p:column headerText="Estado" class="titulo" sortBy="#{ticket.status}">
                     <h:outputText value="#{ticket.status}" class="valor"/>
                 </p:column>
                 <p:column headerText="Comentarios" class="titulo">
-                    <h:outputText value="#{ticket.comment}" class="valor"/>
+                    <h:outputText value="#{ticket.comments}" class="valor"/>
                 </p:column>
                 <p:column headerText="Acciones" class="titulo">
-                    <p:commandButton action="#{StoryBean.editedStory(stories.id,'activo')}" value="activo" styleClass="rounded-button ui-button-success"/>
-                    <p:commandButton action="#{StoryBean.editedStory(stories.id,'en proceso')}" value="en proceso" styleClass="rounded-button ui-button-warning"/>
-                    <p:commandButton action="#{StoryBean.editedStory(stories.id,'finalizado')}" value="finalizado" styleClass="rounded-button ui-button-secondary"/>
-                    <p:commandButton action="#{StoryBean.deleteStory(stories.id)}" icon="pi pi-trash" styleClass="rounded-button ui-button-danger"/>
+                    <p:commandButton action="#{TicketBean.editedTicket(ticket.id,'activo')}" value="activo" styleClass="rounded-button ui-button-success"/>
+                    <p:commandButton action="#{TicketBean.editedTicket(ticket.id,'en proceso')}" value="en proceso" styleClass="rounded-button ui-button-warning"/>
+                    <p:commandButton action="#{TicketBean.editedTicket(ticket.id,'finalizado')}" value="finalizado" styleClass="rounded-button ui-button-secondary"/>
+                    <p:commandButton action="#{TicketBean.deleteTicket(ticket.id)}" icon="pi pi-trash" styleClass="rounded-button ui-button-danger"/>
                 </p:column>
             </p:dataTable>
         </div>
-        <p:dialog header="Crear Nueva Historia" widgetVar="dlg2" modal="true"  resizable="false" height="400">
+        <p:dialog header="Crear Nuevo Ticket" widgetVar="dlg2" modal="true"  resizable="false" height="400">
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate/>
             </p:messages>
@@ -72,9 +71,12 @@
                     <f:selectItem itemLabel="en proceso" itemValue="en proceso"/>
                     <f:selectItem itemLabel="finalizado" itemValue="finalizado"/>
                 </h:selectOneMenu>
+                <h:outputLabel for="comentario" value="comentario:" />
+                <p:inputText id="comentario" binding= "#{comentario}"/>
+                <label class="bmd-label-floating">Comentario:</label>
                 <p:commandButton value="Registrar" >
                     <p:confirm header="Confirmación" message="¿Desea agregar historia?" icon="pi pi-exclamation-triangle" />
-                    <f:actionListener binding="#{StoryBean.register(descripcion.value,ProjectBean.projectId,status.value)}" update="frmm2" />
+                    <f:actionListener binding="#{TicketBean.registerTicket(descripcion.value,StoryBean.storyId,status.value,comentario.value)}" update="frmm2" />
                 </p:commandButton>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                     <div align="center">

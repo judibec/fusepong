@@ -45,6 +45,7 @@
                     <p:commandButton action="#{StoryBean.editedStory(stories.id,'activo')}" value="activo" styleClass="rounded-button ui-button-success"/>
                     <p:commandButton action="#{StoryBean.editedStory(stories.id,'en proceso')}" value="en proceso" styleClass="rounded-button ui-button-warning"/>
                     <p:commandButton action="#{StoryBean.editedStory(stories.id,'finalizado')}" value="finalizado" styleClass="rounded-button ui-button-secondary"/>
+                    <p:commandButton action="#{StoryBean.getStoriesTicket(stories.id)}" icon="pi pi-search" styleClass="rounded-button ui-button-success"/>
                     <p:commandButton action="#{StoryBean.deleteStory(stories.id)}" icon="pi pi-trash" styleClass="rounded-button ui-button-danger"/>
                 </p:column>
             </p:dataTable>

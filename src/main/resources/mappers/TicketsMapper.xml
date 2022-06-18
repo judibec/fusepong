@@ -10,8 +10,38 @@
         <result property='story' column='id_historia'/>
         <result property='status' column='estado'/>
         <result property='comments' column='comentarios'/>
-        <!--        <association property="resources" javaType="Resource" resultMap="edu.eci.cvds.gestor.persistence.mybatis.mappers.ResourceMapper.ResourceResult" columnPrefix="re_"/>-->
+        <association property="stories" javaType="Stories" resultMap="fusePong.persistence.mybatis.mappers.StoriesMapper.StoriesResult" columnPrefix="s_"/>
         <!--        <association property="Uname" javaType="User" resultMap="edu.eci.cvds.gestor.persistence.mybatis.mappers.UserMapper.UserResult" columnPrefix="u_"/>-->
     </resultMap>
 
+    <select parameterType="map" id="getStoriesTicket" resultMap="TicketsResult">
+        select
+        t.id_ticket,
+        t.descripcion,
+        t.id_historia,
+        t.estado,
+        t.comentarios,
+        s.descripcion as s_descripcion
+
+        From Tickets t
+        JOIN Historias s ON s.id_historia=t.id_historia
+        WHERE t.id_historia = #{storyId};
+    </select>
+
+    <delete id="deletedTicket">
+        Delete
+        From Tickets t
+
+        WHERE t.id_ticket = #{ticketId};
+    </delete>
+
+    <update id="editedTicket">
+        Update Tickets t
+        set estado=#{estado}
+        Where t.id_ticket = #{ticketId};
+    </update>
+
+    <insert id="registerTicket" parameterType="map">
+        insert into Tickets(descripcion, id_historia, estado, comentarios) values (#{descripcion}, #{storyId}, #{estado}, #{comentario});
+    </insert>
 </mapper>
